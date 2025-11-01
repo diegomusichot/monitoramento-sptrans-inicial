@@ -1,0 +1,30 @@
+services:
+  airflow:
+    image: apache/airflow:2.9.3
+    container_name: airflow_sptrans
+    env_file:
+      - .env
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__WEBSERVER__SECRET_KEY: umasecretqualquer
+      AIRFLOW__CORE__FERNET_KEY: qNKWFH_2x84alVdqPRXiISVMizmLf2KdSlbzOfYYY8k=
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "False"
+      TZ: ${TZ}
+      SPTRANS_TOKEN: ${SPTRANS_TOKEN}
+      _PIP_ADDITIONAL_REQUIREMENTS: "-r /opt/airflow/requirements.txt"
+    user: "${AIRFLOW_UID:-50000}:0"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./data_lake:/opt/airflow/data_lake
+    command: >
+      bash -c "
+      airflow db init &&
+      airflow users create --username airflow --password airflow --firstname Air --lastname Flow --role Admin --email admin@example.com &&
+      airflow webserver &
+      airflow scheduler
+      "
+    restart: unless-stopped

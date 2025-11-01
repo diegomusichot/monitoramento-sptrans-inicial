@@ -1,0 +1,10 @@
+# --- IGNORA ARQUIVOS SENSÍVEIS ---
+.env                    # arquivo com tokens e variáveis privadas
+
+# --- IGNORA ARQUIVOS GERADOS PELO PYTHON ---
+__pycache__/            # cache automático criado ao rodar scripts
+*.pyc                   # arquivos compilados do Python
+
+# --- IGNORA OS DADOS BRUTOS (QUE SÃO GERADOS PELO PROJETO) ---
+data_lake/*             # ignora tudo dentro do data_lake
+!data_lake/.gitkeep     # mas mantém o marcador .gitkeep para a pasta existir no Git
