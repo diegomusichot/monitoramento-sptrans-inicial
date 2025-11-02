@@ -1,10 +1,13 @@
-# --- IGNORA ARQUIVOS SENSÍVEIS ---
-.env                    # arquivo com tokens e variáveis privadas
+# Arquivos sensíveis e temporários
+.env
+__pycache__/
+*.pyc
+*.pyo
 
-# --- IGNORA ARQUIVOS GERADOS PELO PYTHON ---
-__pycache__/            # cache automático criado ao rodar scripts
-*.pyc                   # arquivos compilados do Python
+# Data lake (não versionar dados)
+data_lake/*
+!data_lake/.gitkeep
 
-# --- IGNORA OS DADOS BRUTOS (QUE SÃO GERADOS PELO PROJETO) ---
-data_lake/*             # ignora tudo dentro do data_lake
-!data_lake/.gitkeep     # mas mantém o marcador .gitkeep para a pasta existir no Git
+# Logs e cache do Airflow
+logs/
+airflow_home/
