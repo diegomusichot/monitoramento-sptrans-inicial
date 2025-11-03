@@ -28,3 +28,18 @@ services:
       airflow scheduler
       "
     restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: sptrans_postgres
+    environment:
+      POSTGRES_USER: sptrans
+      POSTGRES_PASSWORD: sptrans
+      POSTGRES_DB: sptrans
+      TZ: ${TZ}
+    ports:
+      - "5432:5432"  # mapeia a porta local
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
