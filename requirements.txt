@@ -1,3 +1,6 @@
 requests>=2.32
 python-dateutil>=2.9
 pytz>=2024.1
+pandas>=2.2
+pyarrow>=16.0
+duckdb

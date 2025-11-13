@@ -27,6 +27,12 @@ else:
 
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
+from datetime import datetime
+# cria partições por data/hora: data_lake/.../dt=YYYY-MM-DD/hh=HH/
+now = datetime.now()
+OUTDIR = OUTDIR / f"dt={now:%Y-%m-%d}" / f"hh={now:%H}"
+OUTDIR.mkdir(parents=True, exist_ok=True)
+
 
 # --- Função de login com fallback ---
 def login(session: requests.Session, token: str) -> None:

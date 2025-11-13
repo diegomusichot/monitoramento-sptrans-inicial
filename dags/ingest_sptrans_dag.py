@@ -10,7 +10,6 @@ Destaques:
 - Reexecuta em caso de falha (retries)
 - Define tempo máximo de execução (timeout)
 - Impede execuções simultâneas (max_active_runs)
-- Aplica boas práticas de robustez e organização
 """
 
 # Importações necessárias
@@ -65,14 +64,6 @@ with DAG(
         # SLA (Service Level Agreement): alerta visual na UI caso ultrapasse 1 minuto
         # Isso não envia e-mails — apenas exibe um aviso na interface.
         sla=timedelta(minutes=1),
-
-        # Variáveis de ambiente adicionais (opcional)
-        # Exemplo: passar timezone ou variáveis definidas no Airflow
-        # env={"TZ": "America/Sao_Paulo"},
     )
-
-    # ------------------------------------------------------------
-    # 🔗 DEPENDÊNCIAS (se existissem outras tasks)
-    # ------------------------------------------------------------
-    # Neste caso, temos apenas uma task, então ela roda sozinha.
+    
     ingest
